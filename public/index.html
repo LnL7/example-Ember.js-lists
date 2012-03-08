@@ -1,0 +1,34 @@
+<html>
+<head>
+	<title>n-ember1</title>
+	<script type="text/javascript" src="lib/jquery/jquery.js"></script>
+	<script type="text/javascript" src="lib/ember/ember.js"></script>
+	<script type="text/javascript" src="lib/ember-rest/ember-rest.js"></script>
+	<script type="text/javascript" src="lib/ember-layout/ember-layout.js"></script>
+	<script type="text/javascript" src="lib/ember-routemanager/ember-routemanager.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+
+	<script	type="text/x-handlebars" data-template-name="main">
+		<div>
+			<h1>{{title}}</h1>
+			{{view App.ShowsView}}
+		</div>
+	</script>
+
+	<script	type="text/x-handlebars" data-template-name="shows">
+		<h2>{{title}}</h2>
+		<ul>
+			{{#collection contentBinding="shows"}}
+				{{view App.ShowView showBinding="content"}}
+			{{/collection}}
+		</ul>
+	</script>
+	<script type="text/x-handlebars" data-template-name="show">
+		<li>{{show.name}}</li>
+	</script>
+
+</head>
+<body>
+	<div id="main"></div>
+</body>
+</html>
