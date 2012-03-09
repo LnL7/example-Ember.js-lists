@@ -49,7 +49,12 @@ App.SeasonController = Em.ArrayProxy.extend({
   content: null,
   add: function(number) {
     return this.pushObject(Em.Object.create({
-      number: number
+      number: number,
+      init: function() {
+        this._super();
+        this.set('eppisodes', App.EppisodeController.create());
+        return this.eppisodes.add('1');
+      }
     }));
   },
   init: function() {
@@ -60,4 +65,21 @@ App.SeasonController = Em.ArrayProxy.extend({
 
 App.SeasonView = Em.View.extend({
   templateName: 'season'
+});
+
+App.EppisodeController = Em.ArrayProxy.extend({
+  content: null,
+  add: function(number) {
+    return this.pushObject(Em.Object.create({
+      number: number
+    }));
+  },
+  init: function() {
+    this._super();
+    return this.set('content', []);
+  }
+});
+
+App.EppisodeView = Em.View.extend({
+  templateName: 'eppisode'
 });

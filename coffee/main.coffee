@@ -47,6 +47,10 @@ App.SeasonController = Em.ArrayProxy.extend
 	add: (number) ->
 		@pushObject Em.Object.create
 			number: number
+			init: ->
+				@_super()
+				@set 'eppisodes', App.EppisodeController.create()
+				@eppisodes.add '1'
 
 	init: ->
 		@_super()
@@ -54,3 +58,20 @@ App.SeasonController = Em.ArrayProxy.extend
 
 App.SeasonView = Em.View.extend
 	templateName: 'season'
+
+
+##
+# Eppisode
+
+App.EppisodeController = Em.ArrayProxy.extend
+	content: null
+	add: (number) ->
+		@pushObject Em.Object.create
+			number: number
+
+	init: ->
+		@_super()
+		@set 'content', []
+
+App.EppisodeView = Em.View.extend
+	templateName: 'eppisode'
