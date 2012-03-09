@@ -6,24 +6,24 @@
 	<script type="text/javascript" src="main.js"></script>
 
 	<script	type="text/x-handlebars" data-template-name="root">
-		<ul>{{view App.ShowView controllerBinding="controller.shows"}}</ul>
+		<ul>{{view App.ShowsView controllerBinding="controller.shows"}}</ul>
 	</script>
 
-	<script type="text/x-handlebars" data-template-name="show">
+	<script type="text/x-handlebars" data-template-name="shows">
 		{{#collection contentBinding="controller"}}
 			<li>{{content.name}}</li>
-			<ul>{{view App.SeasonView controllerBinding="content.seasons"}}</ul>
+			<ul>{{view App.SeasonsView controllerBinding="content.seasons"}}</ul>
 		{{/collection}}
 	</script>
 
-	<script type="text/x-handlebars" data-template-name="season">
+	<script type="text/x-handlebars" data-template-name="seasons">
 		{{#collection contentBinding="controller"}}
 			<li>Season {{content.number}}</li>
-			<ul>{{view App.EppisodeView controllerBinding="content.eppisodes"}}</ul>
+			<ul>{{view App.EppisodesView controllerBinding="content.eppisodes"}}</ul>
 		{{/collection}}
 	</script>
 
-	<script type="text/x-handlebars" data-template-name="eppisode">
+	<script type="text/x-handlebars" data-template-name="eppisodes">
 		{{#collection contentBinding="controller"}}
 			<li>Eppisode {{content.number}}</li>
 		{{/collection}}

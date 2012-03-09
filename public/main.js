@@ -18,18 +18,18 @@ App.RootController = Em.Object.extend({
       controller: this,
       templateName: 'root'
     }).appendTo('#main');
-    return this.set('shows', App.ShowController.create());
+    return this.set('shows', App.ShowsController.create());
   }
 });
 
-App.ShowController = Em.ArrayProxy.extend({
+App.ShowsController = Em.ArrayProxy.extend({
   content: null,
   add: function(name) {
     return this.pushObject(Em.Object.create({
       name: name,
       init: function() {
         this._super();
-        this.set('seasons', App.SeasonController.create());
+        this.set('seasons', App.SeasonsController.create());
         this.seasons.add('1');
         return this.seasons.add('2');
       }
@@ -41,18 +41,18 @@ App.ShowController = Em.ArrayProxy.extend({
   }
 });
 
-App.ShowView = Em.View.extend({
-  templateName: 'show'
+App.ShowsView = Em.View.extend({
+  templateName: 'shows'
 });
 
-App.SeasonController = Em.ArrayProxy.extend({
+App.SeasonsController = Em.ArrayProxy.extend({
   content: null,
   add: function(number) {
     return this.pushObject(Em.Object.create({
       number: number,
       init: function() {
         this._super();
-        this.set('eppisodes', App.EppisodeController.create());
+        this.set('eppisodes', App.EppisodesController.create());
         return this.eppisodes.add('1');
       }
     }));
@@ -63,11 +63,11 @@ App.SeasonController = Em.ArrayProxy.extend({
   }
 });
 
-App.SeasonView = Em.View.extend({
-  templateName: 'season'
+App.SeasonsView = Em.View.extend({
+  templateName: 'seasons'
 });
 
-App.EppisodeController = Em.ArrayProxy.extend({
+App.EppisodesController = Em.ArrayProxy.extend({
   content: null,
   add: function(number) {
     return this.pushObject(Em.Object.create({
@@ -80,6 +80,6 @@ App.EppisodeController = Em.ArrayProxy.extend({
   }
 });
 
-App.EppisodeView = Em.View.extend({
-  templateName: 'eppisode'
+App.EppisodesView = Em.View.extend({
+  templateName: 'eppisodes'
 });
