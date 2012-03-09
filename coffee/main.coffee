@@ -1,8 +1,6 @@
 App = Em.Application.create
 	ready: ->
 		root = App.RootController.create()
-		root.shows.add 'Fringe'
-		root.shows.add 'NCIS'
 
 window.App = App
 
@@ -15,6 +13,8 @@ App.RootController = Em.Object.extend
 			templateName: 'root'
 		.appendTo '#main'
 		@set 'shows', App.ShowsController.create()
+		@shows.add 'Fringe'
+		@shows.add 'NCIS'
 
 
 ##
@@ -23,55 +23,76 @@ App.RootController = Em.Object.extend
 App.ShowsController = Em.ArrayProxy.extend
 	content: null
 	add: (name) ->
-		@pushObject Em.Object.create
+		@pushObject App.ShowModel.create
 			name: name
-			init: ->
-				@_super()
-				@set 'seasons', App.SeasonsController.create()
-				@seasons.add '1'
-				@seasons.add '2'
 
 	init: ->
 		@_super()
 		@set 'content', []
+
+App.ShowModel = Em.Object.extend
+	name: null
+	init: ->
+		@_super()
+		@set 'seasons', App.SeasonsController.create()
+		@seasons.add '1'
+		@seasons.add '2'
 
 App.ShowsView = Em.View.extend
 	templateName: 'shows'
 
+App.ShowView = Em.View.extend
+	templateName: 'show'
+
 
 ##
-# Seasons
+# Season
 
 App.SeasonsController = Em.ArrayProxy.extend
 	content: null
 	add: (number) ->
-		@pushObject Em.Object.create
+		@pushObject App.SeasonModel.create
 			number: number
-			init: ->
-				@_super()
-				@set 'eppisodes', App.EppisodesController.create()
-				@eppisodes.add '1'
 
 	init: ->
 		@_super()
 		@set 'content', []
+
+App.SeasonModel = Em.Object.extend
+	number: null
+	init: ->
+		@_super()
+		@set 'eppisodes', App.EppisodesController.create()
+		@eppisodes.add '1'
+		@eppisodes.add '2'
 
 App.SeasonsView = Em.View.extend
 	templateName: 'seasons'
 
+App.SeasonView = Em.View.extend
+	templateName: 'season'
+
 
 ##
-# Eppisodes
+# Eppisode
 
 App.EppisodesController = Em.ArrayProxy.extend
 	content: null
 	add: (number) ->
-		@pushObject Em.Object.create
+		@pushObject App.EppisodeModel.create
 			number: number
 
 	init: ->
 		@_super()
 		@set 'content', []
 
+App.EppisodeModel = Em.Object.extend
+	number: null
+	init: ->
+		@_super()
+
 App.EppisodesView = Em.View.extend
 	templateName: 'eppisodes'
+
+App.EppisodeView = Em.View.extend
+	templateName: 'eppisode'

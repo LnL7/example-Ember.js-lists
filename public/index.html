@@ -6,27 +6,36 @@
 	<script type="text/javascript" src="main.js"></script>
 
 	<script	type="text/x-handlebars" data-template-name="root">
-		<ul>{{view App.ShowsView controllerBinding="controller.shows"}}</ul>
+		<ul>{{view App.ShowsView showsBinding="controller.shows"}}</ul>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="shows">
-		{{#collection contentBinding="controller"}}
-			<li>{{content.name}}</li>
-			<ul>{{view App.SeasonsView controllerBinding="content.seasons"}}</ul>
+		{{#collection contentBinding="shows"}}
+			{{view App.ShowView showBinding="content"}}
 		{{/collection}}
+	</script>
+	<script type="text/x-handlebars" data-template-name="show">
+		<li>{{show.name}}</li>
+		<ul>{{view App.SeasonsView seasonsBinding="show.seasons"}}</ul>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="seasons">
-		{{#collection contentBinding="controller"}}
-			<li>Season {{content.number}}</li>
-			<ul>{{view App.EppisodesView controllerBinding="content.eppisodes"}}</ul>
+		{{#collection contentBinding="seasons"}}
+			{{view App.SeasonView seasonBinding="content"}}
 		{{/collection}}
+	</script>
+	<script type="text/x-handlebars" data-template-name="season">
+		<li>Season {{season.number}}</li>
+		<ul>{{view App.EppisodesView eppisodesBinding="season.eppisodes"}}</ul>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name="eppisodes">
-		{{#collection contentBinding="controller"}}
-			<li>Eppisode {{content.number}}</li>
+		{{#collection contentBinding="eppisodes"}}
+			{{view App.EppisodeView eppisodeBinding="content"}}
 		{{/collection}}
+	</script>
+	<script type="text/x-handlebars" data-template-name="eppisode">
+		<li>Eppisode {{eppisode.number}}</li>
 	</script>
 
 </head>
