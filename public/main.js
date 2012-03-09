@@ -2,40 +2,38 @@ var App;
 
 App = Em.Application.create({
   ready: function() {
-    return window.root = App.RootController.create();
+    var root;
+    root = App.RootController.create();
+    return root.shows.add('Fringe');
   }
 });
 
 window.App = App;
 
 App.RootController = Em.Object.extend({
-  title: 'Root Controller',
   init: function() {
+    this._super();
     Em.View.create({
       controller: this,
       templateName: 'root'
     }).appendTo('#main');
-    this.set('shows', App.ShowsController.create());
-    return this._super();
+    return this.set('shows', App.ShowController.create());
   }
 });
 
-App.ShowsController = Em.ArrayProxy.extend({
-  title: 'Shows Controller',
-  content: [],
-  add: function(id, name) {
+App.ShowController = Em.ArrayProxy.extend({
+  content: null,
+  add: function(name) {
     return this.pushObject(Em.Object.create({
-      id: id,
       name: name
     }));
   },
   init: function() {
-    this.add(1, 'Fringe');
-    this.add(2, 'Game of Thrones');
-    return this._super();
+    this._super();
+    return this.set('content', []);
   }
 });
 
-App.ShowsView = Em.View.extend({
-  templateName: 'shows'
+App.ShowView = Em.View.extend({
+  templateName: 'show'
 });

@@ -1,40 +1,29 @@
 App = Em.Application.create
 	ready: ->
-		window.root = App.RootController.create()
+		root = App.RootController.create()
+		root.shows.add 'Fringe'
 
 window.App = App
 
 
-##
-# Root
-
 App.RootController = Em.Object.extend
-	title: 'Root Controller'
 	init: ->
+		@_super()
 		Em.View.create
 			controller: this
 			templateName: 'root'
 		.appendTo '#main'
+		@set 'shows', App.ShowController.create()
 
-		@set 'shows', App.ShowsController.create()
-		@_super()
-
-
-##
-# Shows
-
-App.ShowsController = Em.ArrayProxy.extend
-	title: 'Shows Controller'
-	content: []
-	add: (id, name) ->
+App.ShowController = Em.ArrayProxy.extend
+	content: null
+	add: (name) ->
 		@pushObject Em.Object.create
-			id: id
 			name: name
 
 	init: ->
-		@add 1, 'Fringe'
-		@add 2, 'Game of Thrones'
 		@_super()
+		@set 'content', []
 
-App.ShowsView = Em.View.extend
-	templateName: 'shows'
+App.ShowView = Em.View.extend
+	templateName: 'show'

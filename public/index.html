@@ -6,12 +6,10 @@
 	<script type="text/javascript" src="main.js"></script>
 
 	<script	type="text/x-handlebars" data-template-name="root">
-		<div><b>{{controller.title}}</b></div>
-		<ul>{{view App.ShowsView controllerBinding="controller.shows"}}</ul>
+		<ul>{{view App.ShowView controllerBinding="controller.shows"}}</ul>
 	</script>
 
-	<script type="text/x-handlebars" data-template-name="shows">
-		<div><b>{{controller.title}}</b></div>
+	<script type="text/x-handlebars" data-template-name="show">
 		{{#collection contentBinding="controller"}}
 			<li>{{content.name}}</li>
 		{{/collection}}
