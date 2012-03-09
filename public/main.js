@@ -4,7 +4,8 @@ App = Em.Application.create({
   ready: function() {
     var root;
     root = App.RootController.create();
-    return root.shows.add('Fringe');
+    root.shows.add('Fringe');
+    return root.shows.add('NCIS');
   }
 });
 
@@ -25,7 +26,13 @@ App.ShowController = Em.ArrayProxy.extend({
   content: null,
   add: function(name) {
     return this.pushObject(Em.Object.create({
-      name: name
+      name: name,
+      init: function() {
+        this._super();
+        this.set('seasons', App.SeasonController.create());
+        this.seasons.add('1');
+        return this.seasons.add('2');
+      }
     }));
   },
   init: function() {
@@ -36,4 +43,21 @@ App.ShowController = Em.ArrayProxy.extend({
 
 App.ShowView = Em.View.extend({
   templateName: 'show'
+});
+
+App.SeasonController = Em.ArrayProxy.extend({
+  content: null,
+  add: function(number) {
+    return this.pushObject(Em.Object.create({
+      number: number
+    }));
+  },
+  init: function() {
+    this._super();
+    return this.set('content', []);
+  }
+});
+
+App.SeasonView = Em.View.extend({
+  templateName: 'season'
 });

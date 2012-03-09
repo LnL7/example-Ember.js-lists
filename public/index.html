@@ -12,6 +12,13 @@
 	<script type="text/x-handlebars" data-template-name="show">
 		{{#collection contentBinding="controller"}}
 			<li>{{content.name}}</li>
+			<ul>{{view App.SeasonView controllerBinding="content.seasons"}}</ul>
+		{{/collection}}
+	</script>
+
+	<script type="text/x-handlebars" data-template-name="season">
+		{{#collection contentBinding="controller"}}
+			<li>Season {{content.number}}</li>
 		{{/collection}}
 	</script>
 
