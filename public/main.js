@@ -23,14 +23,15 @@ App.RootController = Em.Object.extend({
 App.ShowsController = Em.ArrayProxy.extend({
   title: 'Shows Controller',
   content: [],
-  add: function(name) {
+  add: function(id, name) {
     return this.pushObject(Em.Object.create({
+      id: id,
       name: name
     }));
   },
   init: function() {
-    this.add('Fringe');
-    this.add('Game of Thrones');
+    this.add(1, 'Fringe');
+    this.add(2, 'Game of Thrones');
     return this._super();
   }
 });

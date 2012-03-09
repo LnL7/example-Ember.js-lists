@@ -26,13 +26,14 @@ App.RootController = Em.Object.extend
 App.ShowsController = Em.ArrayProxy.extend
 	title: 'Shows Controller'
 	content: []
-	add: (name) ->
+	add: (id, name) ->
 		@pushObject Em.Object.create
+			id: id
 			name: name
 
 	init: ->
-		@add 'Fringe'
-		@add 'Game of Thrones'
+		@add 1, 'Fringe'
+		@add 2, 'Game of Thrones'
 		@_super()
 
 App.ShowsView = Em.View.extend
